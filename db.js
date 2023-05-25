@@ -16,5 +16,42 @@ const connectDB = async () => {
     }
   };
 
-  
+
 connectDB()
+
+//MODELS
+  //Definindo o model USUARIOS
+    const userSchema = mongoose.Schema({
+      nome:{
+        type: String,
+        require: true
+      },
+      sobrenome: {
+        type: String,
+        require: true
+      },
+      email: {
+        type: String,
+        require: true
+      },
+      idade:{
+        type: Number,
+        require: true
+      }
+    })
+
+
+//Cria o novo model
+
+  const Lucca = mongoose.model('Usuario', userSchema)
+
+  new Lucca({
+    nome: 'Lucca',
+    sobrenome:'Lopes',
+    email:'lucca@gmail.com',
+    idade:21
+  }).save().then(()=>{
+    console.log('Usuario criado com sucesso');
+  }).catch((err)=>{
+    console.log('Erro ao registrar o usuario: '+ err);
+  })
